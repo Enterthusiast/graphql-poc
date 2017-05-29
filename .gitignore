@@ -1,5 +1,5 @@
 .idea
 node_modules
-credentials.js
-domains.js
-postkeys.js
+params/credentials.js
+params/domains.js
+params/postkeys.js
