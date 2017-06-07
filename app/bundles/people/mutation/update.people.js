@@ -13,9 +13,9 @@ import {
 } from 'graphql';
 
 const People = require('./../object/people').model;
-const InputAddress = require('./../object/input-address').model;
+const updateAddress = require('./update.address').model;
 
-const easyPutPeople = require('./../fetch/put.people.js').model;
+const easyPutPeople = require('./../fetch/put.people').model;
 
 const updatePeople = {
     type: People,
@@ -28,19 +28,7 @@ const updatePeople = {
 
         description: {type: GraphQLString},
 
-        address: {
-            type: InputAddress,
-                args: {
-                street_line1: {type: GraphQLString},
-                street_line2: {type: GraphQLString},
-                street_line3: {type: GraphQLString},
-                zip_code: {type: GraphQLString},
-                city_name: {type: GraphQLString},
-                region_name: {type: GraphQLString},
-                state_name: {type: GraphQLString},
-                country_code: {type: GraphQLString}
-            }
-        },
+        address: updateAddress,
         address_npai: {type: GraphQLString},
 
         email: {type: GraphQLString},
@@ -61,7 +49,7 @@ const updatePeople = {
         alice_id: {type: GraphQLString},
         sf_id: {type: GraphQLString},
     },
-    resolve(rootValue, args) {
+    resolve(parent, args) {
         const uuid = args.uuid;
         delete args.uuid;
         const data = args;

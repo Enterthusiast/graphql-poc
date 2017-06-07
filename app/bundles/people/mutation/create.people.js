@@ -13,13 +13,13 @@ import {
 } from 'graphql';
 
 const People = require('./../object/people').model;
-const InputAddress = require('./../object/input-address').model;
+const updateAddress = require('./update.address');
 
-const easyPostPeople = require('./../fetch/post.people.js').model;
+const easyPostPeople = require('./../fetch/post.people').model;
 
 const createPeople = {
     type: People,
-        args: {
+    args: {
         status: {type: new GraphQLNonNull(GraphQLString)},
         civility: {type: new GraphQLNonNull(GraphQLInt)},
         firstname: {type: new GraphQLNonNull(GraphQLString)},
@@ -27,19 +27,7 @@ const createPeople = {
 
         description: {type: GraphQLString},
 
-        address: {
-            type: InputAddress,
-                args: {
-                street_line1: {type: GraphQLString},
-                street_line2: {type: GraphQLString},
-                street_line3: {type: GraphQLString},
-                zip_code: {type: GraphQLString},
-                city_name: {type: GraphQLString},
-                region_name: {type: GraphQLString},
-                state_name: {type: GraphQLString},
-                country_code: {type: GraphQLString}
-            }
-        },
+        address: updateAddress,
         address_npai: {type: GraphQLString},
 
         email: {type: GraphQLString},
@@ -60,7 +48,7 @@ const createPeople = {
         alice_id: {type: GraphQLString},
         sf_id: {type: GraphQLString},
     },
-    resolve(rootValue, args) {
+    resolve(parent, args) {
         return easyPostPeople(args).then(people => {
             return people;
         });

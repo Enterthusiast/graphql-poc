@@ -12,14 +12,10 @@ import {
     GraphQLNonNull,
 } from 'graphql';
 
-const readEcho = {
-    type: GraphQLString,
-    args: {
-        message: {type: GraphQLString}
-    },
-    resolve(parent, args) {
-        return `received: ${args.message}`;
-    }
+const Address = require('./../object/address').model;
+
+const readAddress = {
+    type: Address
 };
 
-module.exports = readEcho;
+module.exports = readAddress;

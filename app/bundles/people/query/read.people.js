@@ -23,7 +23,7 @@ const readPeople = {
         uuid: {type: new GraphQLNonNull(GraphQLString)},
         embedded: {type: new GraphQLList(GraphQLString)}
     },
-    resolve(rootValue, args) {
+    resolve(parent, args) {
         return easyFetchPeople(args.uuid)
             .then(people => easyEmbedded(people, args.embedded));
     }

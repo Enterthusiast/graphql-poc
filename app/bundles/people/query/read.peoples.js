@@ -19,20 +19,20 @@ const easyEmbedded = require('./../../../utils/embedded/get.embedded');
 
 const readPeoples = {
     type: new GraphQLList(People),
-        args: {
+    args: {
         count: {type: GraphQLInt},
         embedded: {type: new GraphQLList(GraphQLString)}
     },
-    resolve(rootValue, args) {
-        if(args.embedded) {
-            return easyFetchPeoples(args.count)
-                .then(peoples => Promise.all(peoples
-                    .map(people => easyEmbedded(people, args.embedded))
-                    )
-                );
-        } else {
+    resolve(parent, args) {
+        // if(args.embedded) {
+        //     return easyFetchPeoples(args.count)
+        //         .then(peoples => Promise.all(peoples
+        //             .map(people => easyEmbedded(people, args.embedded))
+        //             )
+        //         );
+        // } else {
             return easyFetchPeoples(args.count);
-        }
+        // }
     }
 };
 

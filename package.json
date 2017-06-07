@@ -4,7 +4,7 @@
   "description": "Having fun with a graphql tutorial and trying to do more with private apis",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "babel-node app/server.js"
   },
   "repository": {
     "type": "git",

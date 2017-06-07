@@ -12,14 +12,10 @@ import {
     GraphQLNonNull,
 } from 'graphql';
 
-const readEcho = {
-    type: GraphQLString,
-    args: {
-        message: {type: GraphQLString}
-    },
-    resolve(parent, args) {
-        return `received: ${args.message}`;
-    }
+const Job = require('./../object/job').model;
+
+const readJob = {
+    type: Job
 };
 
-module.exports = readEcho;
+module.exports = readJob;

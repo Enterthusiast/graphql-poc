@@ -17,7 +17,7 @@ const createEcho = {
     args: {
         message: {type: GraphQLString}
     },
-    resolve(rootValue, args) {
+    resolve(parent, args) {
         return `received: ${args.message}`;
     }
 };

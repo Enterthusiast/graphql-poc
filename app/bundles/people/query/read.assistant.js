@@ -12,14 +12,10 @@ import {
     GraphQLNonNull,
 } from 'graphql';
 
-const readEcho = {
-    type: GraphQLString,
-    args: {
-        message: {type: GraphQLString}
-    },
-    resolve(parent, args) {
-        return `received: ${args.message}`;
-    }
+const Assistant = require('./../object/assistant').model;
+
+const readAssistant = {
+    type: Assistant
 };
 
-module.exports = readEcho;
+module.exports = readAssistant;
