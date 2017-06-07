@@ -14,40 +14,18 @@ import {
 
 const People = require('./../object/people').model;
 
-const easyFetch = require('./../../../utils/fetch/get').fromUrl;
 const easyFetchPeople = require('./../fetch/get.people.js').model;
+const easyEmbedded = require('./../../../utils/embedded/get.embedded');
 
 const readPeople = {
     type: People,
-        args: {
+    args: {
         uuid: {type: new GraphQLNonNull(GraphQLString)},
         embedded: {type: new GraphQLList(GraphQLString)}
     },
     resolve(rootValue, args) {
-        return easyFetchPeople(args.uuid).then(people => {
-            if(args.embedded) {
-                const fetchList = args.embedded.reduce((fetchList, field) => {
-                    if(people._links && people._links[field]) {
-                        fetchList.push(easyFetch(people._links[field].href));
-                    }
-                    return fetchList;
-                }, []);
-                return Promise.all(fetchList)
-                    .then(fetchData => {
-                        fetchData.map((data, index) => {
-                            if(data._embedded && data._embedded[args.embedded[index]]) {
-                                people[args.embedded[index]] = data._embedded[args.embedded[index]];
-                            } else {
-                                people[args.embedded[index]] = {};
-                            }
-                        });
-                        debugger;
-                        return people;
-                    });
-            } else {
-                return people;
-            }
-        });
+        return easyFetchPeople(args.uuid)
+            .then(people => easyEmbedded(people, args.embedded));
     }
 };
 
