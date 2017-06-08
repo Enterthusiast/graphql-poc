@@ -13,7 +13,7 @@ import {
 } from 'graphql';
 
 const People = require('./../object/people').model;
-const updateAddress = require('./update.address').model;
+const updateAddress = require('./update.address');
 
 const easyPutPeople = require('./../fetch/put.people').model;
 

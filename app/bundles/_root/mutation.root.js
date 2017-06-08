@@ -21,7 +21,7 @@ const mutation = new GraphQLObjectType({
     fields: () => ({
         createEcho: createEcho,
         createPeople: createPeople,
-        // updatePeople: updatePeople
+        updatePeople: updatePeople
     })
 });
 
